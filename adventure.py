@@ -72,7 +72,8 @@ def main():
 
     while (True):
         #some form of input to pick weapon
-        weapon = 1
+        #weapon = 1
+        weapon = random.randint(1, 3)
         attack = random.randint(3, 5)
         if weapon == weakness:
             attack *= 2
