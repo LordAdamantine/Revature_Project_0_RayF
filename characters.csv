@@ -1,6 +1,6 @@
 Hero,Fighter,20,3,1,
-Enemy,Skeleton,10,5,1,
 Hero,Archer,15,5,1,
+Enemy,Skeleton,10,5,1,
 Enemy,Slime,5,2,1,
 Hero,Mage,10,10,1,
 Enemy,Goblin,10,3,1,
