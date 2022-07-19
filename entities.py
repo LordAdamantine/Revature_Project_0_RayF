@@ -5,15 +5,25 @@ class Entity:
     logging.basicConfig(filename = "game.log", level = logging.DEBUG, format = '%(asctime)s :: %(message)s')
     def __init__(self, name, hp, power, lvl):
         self.name = name
-        self.hp = hp
-        self.power = power
-        self.lvl = lvl
+        self.hp = int(hp)
+        self.power = int(power)
+        self.lvl = int(lvl)
+        self.current_hp = self.hp * self.lvl
 
     def attack(self):
-        return self.power
+        return int(self.power * self.lvl)
 
     def __str__(self):
-        return "Name: " + str(self.name) + ", hp: " + str(self.hp) + ", Power: " + str(self.power) + ", Level: " + str(self.lvl)
+        return "Name: " + str(self.name) + ", hp: " + str(self.current_hp) + ", Power: " + str(self.power) + ", Level: " + str(self.lvl)
+
+    def take_damage(self, dmg):
+        if dmg <= 0:
+            print(self.name, "deflected the attack!")
+        else:
+            print(self.name, "took", dmg, "damage!\n")
+            self.current_hp -= dmg
+        if self.current_hp <0:
+            self.current_hp = 0
 
 class Hero(Entity):
     def changeName(self):
@@ -29,32 +39,16 @@ class Hero(Entity):
                 logging.error("Attempted illegal comma in name, trying again...")
             else:
                 break
-        self.name=name
+        self.name = name
 
     def lvlUp(self):
         if self.lvl <10:
             self.lvl += 1
             self.power += 2
-            self.hp += 5
-
-    def take_damage(self, dmg):
-        if dmg == 0:
-            print(self.name, "deflected the attack!")
-        else:
-            print(self.name, "took", dmg, "damage!")
-        self.hp -= dmg
-        if self.hp <0:
-            self.hp = 0
 
 class Enemy(Entity):
+    pass
     def lvlUp(self):
         if self.lvl <15:
             self.lvl += 1
             self.power += 1
-            self.hp += 1
-
-    def take_damage(self, dmg):
-        print(self.name, "took", dmg, "damage!")
-        self.hp -= dmg
-        if self.hp <0:
-            self.hp = 0
