@@ -206,12 +206,12 @@ def main():
                     adventure_log.write("You deduced the correct door and moved onward towards the final confrontation.\n\n")
                     break
                 elif choice_door > 5:   #This is the joke result that requires the door section looping, alongside the door mimic.
-                    print("You ran into the wall for some reason, taking 1 damage.\n")
+                    print("You ran into the wall for some reason, bumping your nose against the stones.\n")
                     player.take_damage(1)
-                    adventure_log.write("You ran into the wall for some reason, bumping your nose against the stone.\n\n")
+                    adventure_log.write("You ran into the wall for some reason, bumping your nose against the stones.\n\n")
                 elif abs(choice_door - door) < 2:
-                    print("You were bitten by a door mimic!  You take 3 damage.\n")
-                    adventure_log.write("You were ebitten by a door mimic, but managed to break free from it.\n\n")
+                    print("You were bitten by a door mimic!\n")
+                    adventure_log.write("You were bitten by a door mimic, but managed to break free from it.\n\n")
                     player.take_damage(3)
                 else:       #If you're too far off, it just kills you, again as a joke.
                     print("A pit trap drops you to your doom.  Oh no.\n")
@@ -230,7 +230,8 @@ def main():
                 tutorialized = True
 
             break
-
+        
+        quit = True
         #This just collects a list of characters created for each save.
         player_lst.append(player)
 
@@ -307,8 +308,8 @@ def combat(player, lst_enemies, adventure_log, player_max_hp, diff, infinity):
                     if (player_turn < 0) or (player_turn >3):
                         raise ValueError
                 except ValueError as ve:
-                    print("Please try again, exceeded list value.\n")
-                    logging.error("Exceeded list value, trying again...")
+                    print("Please try again.\n")
+                    logging.error("Input error on player turn, trying again...")
                 else:
                     break
 

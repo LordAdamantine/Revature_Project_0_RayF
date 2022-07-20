@@ -19,17 +19,17 @@ class Entity:   #Superclass for the heroes and enemies I will create
 
     def take_damage(self, dmg):     #Current hp and damaging it is handled inside the superclass since everything takes damage.
         if dmg <= 0:
-            print(self.name, "deflected the attack!")
+            print(self.name, "deflected the attack!")   #Uses the later implemented defense calculation.
         else:
             print(self.name, "took", dmg, "damage!\n")
             self.current_hp -= dmg
-        if self.current_hp <0:
+        if self.current_hp <0:      #To make sure the hp never goes negative.
             self.current_hp = 0
 
 class Hero(Entity):
     def changeName(self):
         while True:
-            try:        #Basic input checking try/except block to prevent commas from being entered.  Unique to the player character.
+            try:        #Basic input checking try/except block to prevent commas from being entered.
                 name = input("What's your character's name?\n")
                 check = re.search(",", name)
                 if check != None:
