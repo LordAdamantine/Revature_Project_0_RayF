@@ -221,6 +221,7 @@ def main():
             
             if quit != True:
                 break
+
             combat(player, lst_enemies, adventure_log, player_max_hp, diff, infinity)
             
 
@@ -262,7 +263,7 @@ def main():
     for elem in player_lst:
         print(str(print_count) + ")" + str(elem))
         print_count += 1
-
+    print("\n")
     return 0
 
 def roll(n):    #Basic die roller essentially for processing of attacks.
@@ -369,15 +370,16 @@ def combat(player, lst_enemies, adventure_log, player_max_hp, diff, infinity):
             if player.current_hp != 0:  #If you win, you go deeper, get experience, heal some, and the battle count goes up, leveling up the enemies.
                 print("You proceed deeper into the dark ruins, seeking ever deeper depths.\n\n\n")
                 adventure_log.write("You proceed deeper into the dark ruins, seeking ever deeper depths.\n\n")
-                xp += (foe.power * foe.lvl)
-                if xp >= xp_threshold:
-                    print("Level up!\n")
-                    player.lvlUp()
-                    xp -= xp_threshold
-                    player_max_hp = player.hp * player.lvl
-                    player.current_hp += player.hp
-                    if player.current_hp > player_max_hp:
-                        player.current_hp = player_max_hp
+                if player.lvl < 10:
+                    xp += (foe.power * foe.lvl)
+                    if xp >= xp_threshold:
+                        print("Level up!\n")
+                        player.lvlUp()
+                        xp -= xp_threshold
+                        player_max_hp = player.hp * player.lvl
+                        player.current_hp += player.hp
+                        if player.current_hp > player_max_hp:
+                            player.current_hp = player_max_hp
             else:
                 if battle_count == 1:
                     print("You were defeated by your very first opponent, an unfortunate result.\n\n")
